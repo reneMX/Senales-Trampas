@@ -1,20 +1,32 @@
 #!/bin/bash
-escribe1()
+escribe2()
 {
 	 echo -n "*" 
 	 sleep .1
 } 
 
-escribe2()
+escribe1()
 {
-	 echo  "###" 
-	sleep .3
+        echo  "###" 
+        sleep .1
 }
 
 escribe3()
 {
-	echo -n "-"
-	sleep .3
+	echo -e "\n@@@"
+        sleep .1
+}
+
+escribe4()
+{
+        echo -n "+"
+        sleep .1
+}
+
+escribe5()
+{
+        echo  -e "\n >>>"
+        sleep .1
 }
   echo $$ > /tmp/while.id
   a=1
@@ -23,34 +35,37 @@ escribe3()
  export a
 
  #trap = asocia un codigo o accion a una senal.
+ trap "let a=1" SIGINT 
+ trap "let a=2" SIGALRM
+ trap "let a=3" SIGPIPE
+ trap "let a=4" SIGUSR1
+ trap "let a=5" SIGTERM 
 
- #trap "((a=a*(-1)))" SIGINT
- trap "let a*=2" SIGINT
- trap "let a*=3" SIGALRM
 
-while [ true ]
+while [ true ] ;
  do
+    
     case $a in
       1)
-	escribe2
-      ;;
-      2)
+        #echo "escribe1 " $a
 	escribe1
       ;;
-      3)
-	escribe3
+      2)
+        #echo "escribe2 " $a
+	escribe2
       ;;
-esac
-
-    #if [ $a -eq 1 ]; then
-    #      echo "Mayor a 0 " $a
-    #     escribe2
-    #elif [ $a -eq 2 ]; then
-    #     echo "diferente de 0 " $a
-    #     escribe1
-    #else
-    #     echo "Ninguna Opccion"
-    #fi
+      3)
+        #echo "escribe3 " $a
+        escribe3
+      ;;
+      4)
+        #echo "escribe4 " $a
+        escribe4
+      ;;
+      5)
+        #echo "escribe5 " $a
+        escribe5
+      ;;
+    esac
+      
 done
-
-
