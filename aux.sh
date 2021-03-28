@@ -20,14 +20,18 @@ export a
 #trap = asocia un codigo o accion a una senal.
 
 #trap "((a=a*(-1)))" SIGINT
-#trap "let a*=-1" SIGINT
-trap "let a*=-1" SIGALRM
+trap "let a*=2" SIGINT
+#trap "let a*=-1" SIGALRM
 while [ true ]
 do
-   if [ $a -gt 0 ]
-   then
-   escribe2
-else
-   escribe1
+   if [ $a -eq 1 ]; then
+	 echo "Mayor a 0 " $a
+	escribe2
+   elif [ $a -eq 2 ]; then
+	echo "diferente de 0 " $a
+	escribe1
+   else
+	echo "Ninguna Opccion"
 fi
 done
+
